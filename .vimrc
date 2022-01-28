@@ -1,4 +1,10 @@
-"
+" File              : .vimrc
+" Author            : David Barcene <david.barcene@utp.ac.pa>
+" Date              : 15.01.2022
+" Last Modified Date: 28.01.2022
+" Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
+
+
 "       /VVVVVVVV\      /VVVVVVVV\
 "       \VVVVVVVV/      \VVVVVVVV/
 "        |VVVVVV|       /VVVVV/
@@ -15,159 +21,194 @@
 "	
 
 
-"# =============================================================================== #
+"# =========================================================================== #
 "#
 "# 	PLUGINS 
 "#
-"# =============================================================================== #
+"# =========================================================================== #
 
-	if empty(glob('~/.vim/autoload/plug.vim'))
-		silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-			\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
 	
-	call plug#begin('~/.vim/plugged')
-		
-		Plug 'lervag/vimtex', { 'for': 'tex' }
-		Plug 'SirVer/ultisnips', { 'for': 'tex' }
-		Plug '907th/vim-auto-save', { 'for': 'tex' }
-		Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
-		Plug 'christoomey/vim-tmux-navigator'
-		Plug 'nanotech/jellybeans.vim'
-		Plug 'nvie/vim-flake8'
-		Plug 'jiangmiao/auto-pairs'
-		Plug 'tpope/vim-surround'
-		Plug 'preservim/nerdtree'
-		Plug 'alpertuna/vim-header'
-		Plug 'MathSquared/vim-python-sql'	
-	call plug#end()
+	Plug 'lervag/vimtex', { 'for': 'tex' }
+	Plug 'SirVer/ultisnips', { 'for': 'tex' }
+	Plug '907th/vim-auto-save', { 'for': 'tex' }
+	Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
+	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'nanotech/jellybeans.vim'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'nvie/vim-flake8'
+	Plug 'tranvansang/octave.vim'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-commentary'
+	Plug 'preservim/nerdtree'
+	Plug 'alpertuna/vim-header'
+	Plug 'MathSquared/vim-python-sql'	
+	Plug 'vim-scripts/AutoComplPop'
 
-" ----------------------------------------------------------------------------------
-" 	Vimtex
-" ----------------------------------------------------------------------------------
-	let g:tex_flavor='latex'
-	let g:vimtex_general_view_method='zathura'
-	let g:vimtex_quickfix_mode=0
-	set conceallevel=1
-	let g:tex_conceal='abdmg'
-	
-	let g:vimtex_compiler_latexmk = { 
-	        \ 'executable' : 'latexmk',
-	        \ 'options' : [ 
-	        \   '-xelatex',
-	        \   '-file-line-error',
-	        \   '-synctex=1',
-	        \   '-interaction=nonstopmode',
-	        \ ],
-	        \}
+call plug#end()
 
-" ----------------------------------------------------------------------------------
-" 	Ultisnips
-" ----------------------------------------------------------------------------------
-	let g:UltiSnipsExpandTrigger = '<tab>' 
-	let g:UltiSnipsJumpForwardTrigger = '<tab>'
-	let g:UltiSnipsJumpBackwardTrigger = '<s-Tab>'
-	let g:UltiSnipsSnippetsDir = "/home/dbarcene/.vim/UltiSnips"
-
-" ----------------------------------------------------------------------------------
-" 	Vim-Auto-Save
-" ----------------------------------------------------------------------------------
-	let g:auto_save = 1 
-	 
-" ----------------------------------------------------------------------------------
-" 	Vim-Auto-Save
-" ----------------------------------------------------------------------------------
-	set conceallevel=1
-	let g:tex_conceal='abdmg'
-	hi Conceal ctermbg=none
-
-" ----------------------------------------------------------------------------------
-" 	Nerdtree
-" ----------------------------------------------------------------------------------
-	autocmd StdinReadPre * let s:std_in=1
-	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif 
-	
-	map <F6> :NERDTreeToggle<CR>
-
-" ----------------------------------------------------------------------------------
-" 	Auto Pairs
-" ----------------------------------------------------------------------------------
-	let g:AutoPairsFlyMode = 1
-
-" ----------------------------------------------------------------------------------
-" 	Vim-Header
-" ----------------------------------------------------------------------------------
-	let g:header_auto_add_header = 0
-	let g:header_field_author = 'David Barcene'
-	let g:header_field_author_email = 'david.barcene@utp.ac.pa'
-	map <F4> :AddHeader<CR>
-
-" ----------------------------------------------------------------------------------
-"	Vimux
-" ----------------------------------------------------------------------------------
-	map <Leader>vp :VimuxPromptCommand<CR>
-
-" ----------------------------------------------------------------------------------
-"	Powerline
-" ----------------------------------------------------------------------------------
-	python3 from powerline.vim import setup as powerline_setup
-	python3 powerline_setup()
-	python3 del powerline_setup
-	set laststatus=2 " Always display the statusline in all windows
-	set showtabline=2 " Always display the tabline, even if there is only one tab
-	set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-	set t_Co=256
-
-"# =============================================================================== #
+"# =========================================================================== #
 "#
 "# 	GENERAl SETTINGS
 "#
-"# =============================================================================== #
+"# =========================================================================== #
 
-	colorscheme jellybeans
-	
-	let g:jellybeans_overrides = {'background': { 'ctermbg': 'none', '256ctermbg': 'none' },}
-	
-	set encoding=utf-8
-	set textwidth=120
-	set rnu 
-	set nocompatible
-	set autoindent
-	syntax on
-	highlight Comment cterm=italic gui=italic
-	set hidden
+colorscheme jellybeans
 
-"	nnoremap <silent> vv <C-w>v	
-	nnoremap <C-Left> :tabprevious<CR>
-	nnoremap <C-Right> :tabnext<CR>
-	:nnoremap j jzz
-	:nnoremap k kzz
-	:nnoremap G Gzz
-	"split navigations | Uncomment these line if not using Plug 'christoomey/vim-tmux-navigator'
-"	nnoremap <C-J> <C-W><C-J>
-"	nnoremap <C-K> <C-W><C-K>
-"	nnoremap <C-L> <C-W><C-L>
-"	nnoremap <C-H> <C-W><C-H>
+let g:jellybeans_overrides = {
+		\'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
+		\}
 
+set encoding=utf-8
+set textwidth=80
+set number relativenumber 
+set nocompatible
+set autoindent
+set colorcolumn=+1
+set hidden
+syntax on
+highlight Comment cterm=italic gui=italic
 
-"# =============================================================================== #
+filetype plugin on
+
+inoremap <C-e> <C-o>A
+nnoremap <silent> vv <C-w>v	
+
+" ------------------------------------------------------------------------------
+" 	Vimtex
+" ------------------------------------------------------------------------------
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+let g:vimtex_compiler_latexmk = { 
+        \ 'executable' : 'latexmk',
+        \ 'options' : [ 
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+
+" ------------------------------------------------------------------------------
+" 	Ultisnips
+" ------------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger = '<tab>' 
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-Tab>'
+let g:UltiSnipsSnippetsDir = "/home/dbarcene/.vim/UltiSnips"
+
+" ------------------------------------------------------------------------------
+" 	Vim-Auto-Save
+" ------------------------------------------------------------------------------
+let g:auto_save = 1 
+	 
+" ------------------------------------------------------------------------------
+" 	Vim-Auto-Save
+" ------------------------------------------------------------------------------
+set conceallevel=1
+let g:tex_conceal='abdmg'
+hi Conceal ctermbg=none
+
+" ------------------------------------------------------------------------------
+" 	Nerdtree
+" ------------------------------------------------------------------------------
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif 
+
+map <F6> :NERDTreeToggle<CR>
+
+" ------------------------------------------------------------------------------
+" 	Auto Pairs
+" ------------------------------------------------------------------------------
+	let g:AutoPairsFlyMode = 1
+
+" ------------------------------------------------------------------------------
+" 	Vim-Header
+" ------------------------------------------------------------------------------
+let g:header_auto_add_header = 1
+let g:header_field_author = 'David Barcene'
+let g:header_field_author_email = 'david.barcene@utp.ac.pa'
+map <F4> :AddHeader<CR>
+
+" ------------------------------------------------------------------------------
+"	Vimux
+" ------------------------------------------------------------------------------
+map <Leader>vp :VimuxPromptCommand<CR>
+
+"# =========================================================================== #
 "#
 "# 	PYTHON
 "#
-"# =============================================================================== #
+"# =========================================================================== #
 
-	au BufNewFile,BufRead *.py
-		\ set tabstop=4 |
-		\ set softtabstop=4 |
-		\ set shiftwidth=4 |
-		\ set textwidth=120 |
-		\ set expandtab |
-		\ set autoindent |
-		\ set fileformat=unix
+au BufNewFile,BufRead *.py
+	\ set tabstop=4 |
+	\ set softtabstop=4 |
+	\ set shiftwidth=4 |
+	\ set textwidth=80 |
+	\ set expandtab |
+	\ set autoindent |
+	\ set fileformat=unix
 
-	let python_highlight_all=1
-    	autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-    	autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+if exists('python_highlight_all')
+    unlet python_highlight_all
+endif
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+" ------------------------------------------------------------------------------
+"	CoC
+" ------------------------------------------------------------------------------
+" Use <Tab> and <S-Tab> to navigate the completion list
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" ------------------------------------------------------------------------------
+"	Powerline
+" ------------------------------------------------------------------------------
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+set laststatus=2 " Always display the statusline in all windows
+set showtabline=2 " Always display the tabline, even if there is only one tab
+set noshowmode " Hide the default mode (e.g. -- INSERT -- below the statusline)
+set t_Co=256
 
 
+"# =========================================================================== #
+"#
+"# 	OCTAVE 
+"#
+"# =========================================================================== #
+
+
+"Octave syntax
+augroup filetypedetect
+  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
+augroup END
+
+
+let octave_highlight_variables=1
+let octave_highlight_operators=1
+
+" Use keywords from Octave syntax language file for autocomplete
+" Use keywords from Octave syntax language file for autocomplete 
+if has("autocmd") && exists("+omnifunc") 
+  autocmd Filetype octave if &omnifunc == "" | setlocal omnifunc=syntaxcomplete#Complete | endif 
+  autocmd FileType octave  setlocal keywordprg=info\ octave\ --vi-keys\ --index-search
+  autocmd FileType octave  setlocal complete+=k
+  autocmd FileType octave  setlocal completeopt=menuone,longest
+  autocmd FileType octave  setlocal dictionary=~/.vim/syntax/octave.vim
+endif

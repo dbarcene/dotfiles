@@ -1,0 +1,24 @@
+{
+	"suggest.noselect": false,
+	"coc.preferences.formatOnSaveFiletypes": [
+		"json",
+		"python"
+	],
+	"coc.source.bibtex.filetypes": [
+		"tex",
+		"plaintex",
+		"latex",
+		"pandoc",
+		"markdown"
+	],
+	"list.source.bibtex.files": [
+		"/home/dbarcene/Documents/latex-docs/bibliography/ref.bib"
+	],
+	"coc.source.bibtex.triggerPatterns": [
+		"cite\\{",
+		"cite\\{.*, "
+	],
+	"coc.source.bibtex.triggerCharacters": [
+		"@"
+	]
+}

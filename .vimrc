@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 28.01.2022
+" Last Modified Date: 09.02.2022
 " Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 
@@ -13,12 +13,12 @@
 "        |VVVVVV|  /VVVVV/
 "        |VVVVVV|/VVV___
 "        |VVVVVVVVVV/##/  _ _ _ _    ___  __ ______
-"        |VVVVVVVVV___  /#_#,#_#,\  /##/_/#//#_#_#/
+"        |VVVVVVVV/___  /#_#,#_#,\  /##/_/#//#_#_#/
 "        |VVVVVVV//##/ /#/ /#/ /#/  /#_#_#//#/
 "        |VVVVV/  /#/ /#/ /#/ /#/  /#/    /#/
 "        |VVV/   /#/ /#/ /#/ /#/  /#/     \#\____  
-"        'V/   /##//##//##//###//##/       \####/
-"	
+"        |V/   /##//##//##//###//##/       \####/
+
 
 
 "# =========================================================================== #
@@ -44,12 +44,15 @@ call plug#begin('~/.vim/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nvie/vim-flake8'
 	Plug 'tranvansang/octave.vim'
+	Plug 'elzr/vim-json'
+	Plug 'junegunn/goyo.vim'
+	Plug 'preservim/vim-markdown'
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-commentary'
 	Plug 'preservim/nerdtree'
 	Plug 'alpertuna/vim-header'
-	Plug 'MathSquared/vim-python-sql'	
+	Plug 'MathSquared/vim-python-sql'
 	Plug 'vim-scripts/AutoComplPop'
 
 call plug#end()
@@ -60,11 +63,13 @@ call plug#end()
 "#
 "# =========================================================================== #
 
-colorscheme jellybeans
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
+colorscheme jellybeans
 let g:jellybeans_overrides = {
-		\'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
-		\}
+	\'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
+	\}
 
 set encoding=utf-8
 set textwidth=80
@@ -78,13 +83,14 @@ highlight Comment cterm=italic gui=italic
 
 filetype plugin on
 
-inoremap <C-e> <C-o>A
-nnoremap <silent> vv <C-w>v	
+nnoremap <silent> vv <C-w>v
+nnoremap <Leader>ve :e ~/.vimrc <CR>
+nnoremap <Leader>vr :source ~/.vimrc <CR>
 
 " ------------------------------------------------------------------------------
 " 	Vimtex
 " ------------------------------------------------------------------------------
-let g:tex_flavor='latex'
+let g:tex_flavor='xelatex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
@@ -112,7 +118,8 @@ let g:UltiSnipsSnippetsDir = "/home/dbarcene/.vim/UltiSnips"
 " 	Vim-Auto-Save
 " ------------------------------------------------------------------------------
 let g:auto_save = 1 
-	 
+set undofile
+ 
 " ------------------------------------------------------------------------------
 " 	Vim-Auto-Save
 " ------------------------------------------------------------------------------
@@ -131,12 +138,12 @@ map <F6> :NERDTreeToggle<CR>
 " ------------------------------------------------------------------------------
 " 	Auto Pairs
 " ------------------------------------------------------------------------------
-	let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 1
 
 " ------------------------------------------------------------------------------
 " 	Vim-Header
 " ------------------------------------------------------------------------------
-let g:header_auto_add_header = 1
+let g:header_auto_add_header = 0
 let g:header_field_author = 'David Barcene'
 let g:header_field_author_email = 'david.barcene@utp.ac.pa'
 map <F4> :AddHeader<CR>
@@ -148,7 +155,7 @@ map <Leader>vp :VimuxPromptCommand<CR>
 
 "# =========================================================================== #
 "#
-"# 	PYTHON
+"# 	Python
 "#
 "# =========================================================================== #
 
@@ -173,6 +180,7 @@ autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellesca
 " Use <Tab> and <S-Tab> to navigate the completion list
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 
 " ------------------------------------------------------------------------------
 "	Powerline
@@ -212,3 +220,13 @@ if has("autocmd") && exists("+omnifunc")
   autocmd FileType octave  setlocal completeopt=menuone,longest
   autocmd FileType octave  setlocal dictionary=~/.vim/syntax/octave.vim
 endif
+
+
+"# =========================================================================== #
+"#
+"# 	JSON 
+"#
+"# =========================================================================== #
+
+let g:syntastic_json_checkers = ['jsonlint']
+let g:vim_json_syntax_conceal = 0

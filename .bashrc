@@ -18,11 +18,7 @@ export PATH
 
 setxkbmap -option caps:swapescape
 
-# picom &
-# Uncomment the following line if you don't like systemctls auto-paging feature:
-# export SYSTEMD_PAGER=
-
-# set -o vi	# Vi mode
+set -o vi	# Vi mode
 
 # Run Tmux on startup
 #if command -v tmux &> /dev/null && [ -z "$TMUX"  ]; then
@@ -47,7 +43,6 @@ function cd() {
 alias df='df -h'            #  Prints available space in partitions
 alias cp='cp -iv'
 alias mv='mv -iv'
-alias nv='nvim'
 alias scihub='scihub -O .'
 alias poweroff='systemctl poweroff'
 alias update='sudo apt update'
@@ -72,7 +67,6 @@ alias lm='ll |more'         #  Pipe through 'more'
 alias lr='ll -R'            #  Recursive ls.
 alias la='ll -A'            #  Show hidden files.
 
-#alias tmux='tmux -2'
 
 # ---------------------------------------------------------------------------- #
 # Some programs

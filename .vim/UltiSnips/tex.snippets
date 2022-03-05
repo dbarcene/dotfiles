@@ -2,7 +2,7 @@ global !p
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
-def comment(): 
+def comment():
 	return vim.eval('vimtex#syntax#in_comment()') == '1'
 
 def env(name):
@@ -12,20 +12,49 @@ def env(name):
 endglobal
 
 
+snippet ppt "beamer" b	
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+
+\usetheme{metropolis}           % Use metropolis theme
+
+\title{$1}
+\author{David Barcene \\ \href{mailto:david.barcene@utp.ac.pa}{david.barcene@utp.ac.pa}}
+\date\today
+
+\begin{document}
+
+\maketitle
+
+\section{First Section}
+\begin{frame}{First Frame}
+Hello, world!
+\end{frame}
+
+\end{document}
+endsnippet
+
 snippet template "Basic template" b
-\documentclass[a4paper]{article}
+\documentclass[letter]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
-\usepackage[dutch]{babel}
+\usepackage[spanish]{babel}
 \usepackage{amsmath, amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{/home/dbarcene/Documents/latex-docs/bibliography/ref.bib}
 
 
 % figure support
 \usepackage{import}
 \usepackage{xifthen}
-\pdfminorversion=7
 \usepackage{pdfpages}
 \usepackage{transparent}
 \newcommand{\incfig}[1]{%
@@ -33,11 +62,28 @@ snippet template "Basic template" b
 	\import{./figures/}{#1.pdf_tex}
 }
 
-\pdfsuppresswarningpagegroup=1
+
 
 \begin{document}
+\title{$1}
+\author{David Barcene \\ \href{mailto:david.barcene@utp.ac.pa}{david.barcene@utp.ac.pa}}
+\date\today
+
+\maketitle
+
 	$0
+
+\printbibliography
+
 \end{document}
+endsnippet
+
+snippet bold
+\textbf{$1}$0
+endsnippet
+
+snippet ital
+\textit{$1}$0
 endsnippet
 
 snippet beg "begin{} / end{}" bA
@@ -127,6 +173,11 @@ snippet ali "Align" bA
 .\end{align*}
 endsnippet
 
+priority 100
+context "math()"
+snippet "([a-zA-Z])vec" "vec" riA
+\vec{`!p snip.rv=match.group(1)`}
+endsnippet
 
 context "math()"
 snippet // "Fraction" iA
@@ -177,6 +228,11 @@ priority 10000
 snippet 'sympy(.*)sympy' "sympy" wr
 `!p
 from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+snip.rv = eval('latex(' + match.group(1).replace('\\', '').replace('^', '**').replace('{', '(').replace('}', ')') + ')')
 x, y, z, t = symbols('x y z t')
 k, m, n = symbols('k m n', integer=True)
 f, g, h = symbols('f g h', cls=Function)
@@ -434,6 +490,11 @@ snippet ** "cdot" iA
 \cdot 
 endsnippet
 
+priority 100
+snippet dot "dot" iA
+\dot{$1}$0
+endsnippet
+
 context "math()"
 snippet norm "norm" iA
 \|$1\|$0
@@ -451,17 +512,22 @@ snippet dint "integral" wA
 \int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} $0
 endsnippet
 
+priority 300
+context "math()"
+snippet oint "integral" wA
+\oint $0
+endsnippet
+
 priority 200
 context "math()"
-snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
+snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int|mu|lambda|xi|nu|chi|phi|varphi|Phi)' "ln" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
-
-priority 100
+priority 200
 context "math()"
-snippet -> "to" iA
-\to 
+snippet '(?<!\\)(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|theta|Theta|sigma|Sigma|rho|tau|omega)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
 endsnippet
 
 priority 200
@@ -552,7 +618,7 @@ snippet OO "emptyset" iA
 endsnippet
 
 snippet RR "real" iA
-\R
+\mathscr{R}
 endsnippet
 
 snippet QQ "Q" iA
@@ -597,7 +663,7 @@ snippet bigfun "Big function" iA
 \begin{align*}
 	$1: $2 &\longrightarrow $3 \\\\
 	$4 &\longmapsto $1($4) = $0
-.\end{align*}
+\end{align*}
 endsnippet
 
 snippet cvec "column vector" iA
@@ -614,12 +680,6 @@ priority 100
 context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
 \overline{`!p snip.rv=match.group(1)`}
-endsnippet
-
-priority 10
-context "math()"
-snippet "hat" "hat" riA
-\hat{$1}$0
 endsnippet
 
 priority 100

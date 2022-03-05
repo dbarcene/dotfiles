@@ -48,6 +48,8 @@ alias poweroff='systemctl poweroff'
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
 alias docs='cd ~/Documents/latex-docs/'
+alias papers='cd ~/Documents/articles/'
+alias notes='cd ~/Documents/notes/'
 
 # ---------------------------------------------------------------------------- #
 # The 'ls' family 

@@ -43,6 +43,8 @@ function cd() {
 alias df='df -h'            #  Prints available space in partitions
 alias cp='cp -iv'
 alias mv='mv -iv'
+alias vimrc='vim ~/.vimrc'
+alias bashrc='vim ~/.bashrc'
 alias scihub='scihub -O .'
 alias poweroff='systemctl poweroff'
 alias update='sudo apt update'
@@ -55,7 +57,7 @@ alias notes='cd ~/Documents/notes/'
 # The 'ls' family 
 # ---------------------------------------------------------------------------- #
 # Add colors for filetype and  human-readable sizes by default on 'ls':
-alias ls='ls -h --color'
+alias ls='ls -h --color --group-directories-first'
 alias lx='ls -lXB'          #  Sort by extension.
 alias lk='ls -lSr'          #  Sort by size, biggest last.
 alias lt='ls -ltr'          #  Sort by date, most recent last.
@@ -84,9 +86,9 @@ alias chrome='google-chrome'     # Internet Browser
 #
 # ============================================================================ #
 
-# Bibliography
 
 export BIB=$HOME/Documents/latex-docs/bibliography/ref.bib
+export NOTESDIR=$HOME/Documents/notes/
 
 
 # ---------------------------------------------------------------------------- #
@@ -94,8 +96,6 @@ export BIB=$HOME/Documents/latex-docs/bibliography/ref.bib
 # ---------------------------------------------------------------------------- #
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-
 
 # ---------------------------------------------------------------------------- #
 # Powerline 

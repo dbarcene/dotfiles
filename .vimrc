@@ -39,18 +39,20 @@ call plug#begin('~/.vim/plugged')
 	Plug 'SirVer/ultisnips', { 'for': 'tex' }
 	Plug '907th/vim-auto-save', { 'for': 'tex' }
 	Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'nanotech/jellybeans.vim'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nvie/vim-flake8'
 	Plug 'tranvansang/octave.vim'
 	Plug 'elzr/vim-json'
-	Plug 'junegunn/goyo.vim'
 	Plug 'preservim/vim-markdown'
+	Plug 'preservim/nerdtree'
 	Plug 'jiangmiao/auto-pairs'
+	Plug 'junegunn/goyo.vim'
+	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-commentary'
-	Plug 'preservim/nerdtree'
+	Plug 'tpope/vim-fugitive'
 	Plug 'alpertuna/vim-header'
 	Plug 'MathSquared/vim-python-sql'
 	Plug 'vim-scripts/AutoComplPop'
@@ -82,7 +84,6 @@ syntax on
 highlight Comment cterm=italic gui=italic
 
 filetype plugin on
-
 nnoremap <silent> vv <C-w>v
 nnoremap <Leader>ve :e ~/.vimrc <CR>
 nnoremap <Leader>vr :source ~/.vimrc <CR>
@@ -121,11 +122,16 @@ let g:auto_save = 1
 set undofile
  
 " ------------------------------------------------------------------------------
-" 	Vim-Auto-Save
+" 	Vim-Conceal
 " ------------------------------------------------------------------------------
 set conceallevel=1
 let g:tex_conceal='abdmg'
 hi Conceal ctermbg=none
+
+" ------------------------------------------------------------------------------
+" 	Vim-Markdown
+" ------------------------------------------------------------------------------
+let g:vim_markdown_folding_disabled = 1
 
 " ------------------------------------------------------------------------------
 " 	Nerdtree

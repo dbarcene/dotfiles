@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 09.02.2022
+" Last Modified Date: 18.03.2022
 " Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 
@@ -40,16 +40,15 @@ call plug#begin('~/.vim/plugged')
 	Plug '907th/vim-auto-save', { 'for': 'tex' }
 	Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'nanotech/jellybeans.vim'
 	Plug 'nvie/vim-flake8'
 	Plug 'tranvansang/octave.vim'
 	Plug 'elzr/vim-json'
+	Plug 'jiangmiao/auto-pairs'
 	Plug 'preservim/vim-markdown'
 	Plug 'preservim/nerdtree'
-	Plug 'jiangmiao/auto-pairs'
 	Plug 'junegunn/goyo.vim'
-	Plug 'junegunn/fzf.vim'
+	" Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-commentary'
 	Plug 'tpope/vim-fugitive'
@@ -84,10 +83,23 @@ syntax on
 highlight Comment cterm=italic gui=italic
 
 filetype plugin on
-nnoremap <silent> vv <C-w>v
+nnoremap <silent>vv <C-w>v
+nnoremap <Leader>l <C-w>l
+nnoremap <Leader>h <C-w>h
 nnoremap <Leader>ve :e ~/.vimrc <CR>
 nnoremap <Leader>vr :source ~/.vimrc <CR>
 
+" Change buffers
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
 " ------------------------------------------------------------------------------
 " 	Vimtex
 " ------------------------------------------------------------------------------
@@ -118,7 +130,7 @@ let g:UltiSnipsSnippetsDir = "/home/dbarcene/.vim/UltiSnips"
 " ------------------------------------------------------------------------------
 " 	Vim-Auto-Save
 " ------------------------------------------------------------------------------
-let g:auto_save = 1 
+let g:auto_save = 0 
 set undofile
  
 " ------------------------------------------------------------------------------
@@ -149,7 +161,7 @@ let g:AutoPairsFlyMode = 1
 " ------------------------------------------------------------------------------
 " 	Vim-Header
 " ------------------------------------------------------------------------------
-let g:header_auto_add_header = 0
+let g:header_auto_add_header = 1
 let g:header_field_author = 'David Barcene'
 let g:header_field_author_email = 'david.barcene@utp.ac.pa'
 map <F4> :AddHeader<CR>

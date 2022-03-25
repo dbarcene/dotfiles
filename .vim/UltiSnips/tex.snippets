@@ -18,7 +18,7 @@ snippet ppt "beamer" b
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage[spanish]{babel}
-\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs, amsmath, amssymb}
 \usepackage{hyperref}
 
 \usetheme{metropolis}           % Use metropolis theme
@@ -45,8 +45,9 @@ snippet template "Basic template" b
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
+\usepackage{multicol}
 \usepackage[spanish]{babel}
-\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs, amsmath, amssymb}
 \usepackage[hidelinks]{hyperref}
 \usepackage[backend=biber, style=apa]{biblatex}
 \addbibresource{/home/dbarcene/Documents/latex-docs/bibliography/ref.bib}
@@ -54,6 +55,7 @@ snippet template "Basic template" b
 
 % figure support
 \usepackage{graphicx}
+\graphicspath{ {./figures/} }
 \usepackage{import}
 \usepackage{xifthen}
 \usepackage{pdfpages}
@@ -77,6 +79,10 @@ snippet template "Basic template" b
 \printbibliography
 
 \end{document}
+endsnippet
+
+snippet link 
+\href{run:/home/dbarcene/Documents/articles/$1}{$2}$0
 endsnippet
 
 snippet bold
@@ -171,7 +177,7 @@ endsnippet
 snippet ali "Align" bA
 \begin{align*}
 	${1:${VISUAL}}
-.\end{align*}
+\end{align*}
 endsnippet
 
 priority 100

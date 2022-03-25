@@ -2,7 +2,7 @@
 # File              : .bashrc
 # Author            : David Barcene <david.barcene@utp.ac.pa>
 # Date              : 25.01.2022
-# Last Modified Date: 07.02.2022
+# Last Modified Date: 22.03.2022
 # Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 # ---------------------------------------------------------------------------- #
@@ -45,13 +45,12 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias vimrc='vim ~/.vimrc'
 alias bashrc='vim ~/.bashrc'
-alias scihub='scihub -O .'
 alias poweroff='systemctl poweroff'
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
 alias docs='cd ~/Documents/latex-docs/'
-alias papers='cd ~/Documents/articles/'
-alias notes='cd ~/Documents/notes/'
+alias notes='cd ~/Documents/articles/notes/'
+alias semester='cd ~/Documents/latex-docs/master-semester1-2022/'
 
 # ---------------------------------------------------------------------------- #
 # The 'ls' family 
@@ -79,6 +78,7 @@ alias la='ll -A'            #  Show hidden files.
 alias octave='octave --no-gui'
 alias pdf='zathura'              # PDF reader 
 alias chrome='google-chrome'     # Internet Browser
+# alias scihub='scihub -O ~/Documents/articles/'
 
 # ============================================================================ #
 #
@@ -86,10 +86,9 @@ alias chrome='google-chrome'     # Internet Browser
 #
 # ============================================================================ #
 
-
-export BIB=$HOME/Documents/latex-docs/bibliography/ref.bib
-export NOTESDIR=$HOME/Documents/notes/
-
+export bib="$HOME/Documents/latex-docs/bibliography/ref.bib"
+export articles="$HOME/Documents/articles"
+export notes="$articles/notes"
 
 # ---------------------------------------------------------------------------- #
 # fzf 

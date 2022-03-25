@@ -1,3 +1,8 @@
+# File              : alacritty.yml
+# Author            : David Barcene <david.barcene@utp.ac.pa>
+# Date              : 11.03.2022
+# Last Modified Date: 15.03.2022
+# Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Any items in the `env` entry below will be added as
@@ -121,7 +126,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 12.0
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.

@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 18.03.2022
+" Last Modified Date: 01.04.2022
 " Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 
@@ -130,7 +130,7 @@ let g:UltiSnipsSnippetsDir = "/home/dbarcene/.vim/UltiSnips"
 " ------------------------------------------------------------------------------
 " 	Vim-Auto-Save
 " ------------------------------------------------------------------------------
-let g:auto_save = 0 
+let g:auto_save = 1 
 set undofile
  
 " ------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 01.04.2022
+" Last Modified Date: 16.05.2022
 " Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 
@@ -38,7 +38,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'lervag/vimtex', { 'for': 'tex' }
 	Plug 'SirVer/ultisnips', { 'for': 'tex' }
 	Plug '907th/vim-auto-save', { 'for': 'tex' }
-	Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
+	"Plug 'KeitaNakamura/tex-conceal.vim', { 'for': 'tex' }
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nanotech/jellybeans.vim'
 	Plug 'nvie/vim-flake8'
@@ -48,7 +48,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'preservim/vim-markdown'
 	Plug 'preservim/nerdtree'
 	Plug 'junegunn/goyo.vim'
-	" Plug 'junegunn/fzf.vim'
+	"Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-commentary'
 	Plug 'tpope/vim-fugitive'

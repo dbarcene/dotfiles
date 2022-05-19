@@ -2,7 +2,7 @@
 # File              : .bashrc
 # Author            : David Barcene <david.barcene@utp.ac.pa>
 # Date              : 25.01.2022
-# Last Modified Date: 22.03.2022
+# Last Modified Date: 24.04.2022
 # Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 # ---------------------------------------------------------------------------- #
@@ -50,6 +50,7 @@ alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
 alias docs='cd ~/Documents/latex-docs/'
 alias notes='cd ~/Documents/articles/notes/'
+alias articles='cd ~/Documents/articles/'
 alias semester='cd ~/Documents/latex-docs/master-semester1-2022/'
 
 # ---------------------------------------------------------------------------- #

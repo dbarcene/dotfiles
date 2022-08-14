@@ -2,28 +2,27 @@
 # File              : .bashrc
 # Author            : David Barcene <david.barcene@utp.ac.pa>
 # Date              : 25.01.2022
-# Last Modified Date: 24.04.2022
+# Last Modified Date: 12.07.2022
 # Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 # ---------------------------------------------------------------------------- #
 # source global definitions
 # ---------------------------------------------------------------------------- #
+
+# Run Tmux on startup
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && \
+[[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
+
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
-# User specific environment
-PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-export PATH
 
 setxkbmap -option caps:swapescape
-
 set -o vi	# Vi mode
 
-# Run Tmux on startup
-#if command -v tmux &> /dev/null && [ -z "$TMUX"  ]; then
-#	    tmux attach -t default || tmux new -s default
-#fi
 
 # ============================================================================ #
 #
@@ -48,10 +47,10 @@ alias bashrc='vim ~/.bashrc'
 alias poweroff='systemctl poweroff'
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
-alias docs='cd ~/Documents/latex-docs/'
+alias docs='cd ~/Documents/'
 alias notes='cd ~/Documents/articles/notes/'
 alias articles='cd ~/Documents/articles/'
-alias semester='cd ~/Documents/latex-docs/master-semester1-2022/'
+alias semester='cd ~/Documents/master-semester2-2022/'
 
 # ---------------------------------------------------------------------------- #
 # The 'ls' family 
@@ -79,6 +78,7 @@ alias la='ll -A'            #  Show hidden files.
 alias octave='octave --no-gui'
 alias pdf='zathura'              # PDF reader 
 alias chrome='google-chrome'     # Internet Browser
+alias burai='java -jar ~/Public/burai/bin/burai.jar'     # Internet Browser
 # alias scihub='scihub -O ~/Documents/articles/'
 
 # ============================================================================ #
@@ -87,7 +87,7 @@ alias chrome='google-chrome'     # Internet Browser
 #
 # ============================================================================ #
 
-export bib="$HOME/Documents/latex-docs/bibliography/ref.bib"
+export bib="$HOME/Documents/bibliography/ref.bib"
 export articles="$HOME/Documents/articles"
 export notes="$articles/notes"
 
@@ -116,6 +116,7 @@ fi
 # Conda
 # ---------------------------------------------------------------------------- #
 
+# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/dbarcene/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -130,3 +131,13 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# User specific environment
+PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH=/usr/java/jre1.8.0_333/bin:$PATH # Java
+export PATH
+
+
+PKG_CONFIG_PATH="/usr/share/pkgconfig/:$PKG_CONFIG_PATH"
+PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/:$PKG_CONFIG_PATH"
+	
+export PKG_CONFIG_PATH

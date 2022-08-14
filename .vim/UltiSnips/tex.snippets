@@ -50,7 +50,7 @@ snippet template "Basic template" b
 \usepackage{mathrsfs, amsmath, amssymb}
 \usepackage[hidelinks]{hyperref}
 \usepackage[backend=biber, style=apa]{biblatex}
-\addbibresource{/home/dbarcene/Documents/latex-docs/bibliography/ref.bib}
+\addbibresource{/home/dbarcene/Documents/bibliography/ref.bib}
 
 
 % figure support
@@ -122,6 +122,12 @@ snippet fig "Figure environment" b
 	\caption{${4:$3}}
 	\label{fig:${5:${3/\W+/-/g}}}
 \end{figure}
+endsnippet
+
+snippet frame "Frame environment" b
+\begin{frame}{ ${1} }
+	${2}
+\end{frame}
 endsnippet
 
 snippet enum "Enumerate" bA
@@ -273,8 +279,12 @@ snippet == "equals" iA
 &= $1 \\\\
 endsnippet
 
-snippet != "equals" iA
+snippet != "neq" ia
 \neq 
+endsnippet
+
+snippet approx "approx" ia
+\approx 
 endsnippet
 
 context "math()"

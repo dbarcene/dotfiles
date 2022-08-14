@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 16.05.2022
+" Last Modified Date: 22.07.2022
 " Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 
@@ -71,12 +71,21 @@ colorscheme jellybeans
 let g:jellybeans_overrides = {
 	\'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
 	\}
-
+set backup
+set swapfile
+silent !mkdir -p ./.bak > /dev/null 2>&1
+silent !mkdir -p ./.swp > /dev/null 2>&1
+set backupdir=./.bak
+set directory=./.swp
 set encoding=utf-8
 set textwidth=80
+set formatoptions+=t
+ru mcros/justify.vim
+nnoremap <C-j> gggqG_j
 set number relativenumber 
 set nocompatible
 set autoindent
+set autoread
 set colorcolumn=+1
 set hidden
 syntax on
@@ -100,6 +109,8 @@ nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
+
+
 " ------------------------------------------------------------------------------
 " 	Vimtex
 " ------------------------------------------------------------------------------
@@ -161,7 +172,7 @@ let g:AutoPairsFlyMode = 1
 " ------------------------------------------------------------------------------
 " 	Vim-Header
 " ------------------------------------------------------------------------------
-let g:header_auto_add_header = 1
+let g:header_auto_add_header = 0
 let g:header_field_author = 'David Barcene'
 let g:header_field_author_email = 'david.barcene@utp.ac.pa'
 map <F4> :AddHeader<CR>

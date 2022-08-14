@@ -1,7 +1,7 @@
 # File              : alacritty.yml
 # Author            : David Barcene <david.barcene@utp.ac.pa>
 # Date              : 11.03.2022
-# Last Modified Date: 14.05.2022
+# Last Modified Date: 10.07.2022
 # Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
@@ -93,7 +93,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "JetBrains Mono"
+    family: "JetBrainsMono"
 
     # The `style` can be specified to pick a specific face.
     style: Medium
@@ -126,7 +126,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 12.0
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -164,7 +164,7 @@ opacity: 0.8
 colors:
   # Default colors
   primary:
-    background: '#161821'
+    background: '#1a1b1e'
     foreground: '#d2d4de'
 
   # Normal colors

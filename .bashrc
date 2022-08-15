@@ -21,7 +21,7 @@ fi
 
 
 setxkbmap -option caps:swapescape
-set -o vi	# Vi mode
+#set -o vi	# Vi mode
 
 
 # ============================================================================ #
@@ -48,6 +48,7 @@ alias poweroff='systemctl poweroff'
 alias update='sudo apt update'
 alias upgrade='sudo apt upgrade'
 alias docs='cd ~/Documents/'
+alias books='cd ~/books'
 alias notes='cd ~/Documents/articles/notes/'
 alias articles='cd ~/Documents/articles/'
 alias semester='cd ~/Documents/master-semester2-2022/'
@@ -102,14 +103,14 @@ export notes="$articles/notes"
 # ---------------------------------------------------------------------------- #
 
 # load powerline
-if [ -f `which powerline-daemon` ]; then
-    powerline-daemon -q
-    POWERLINE_BASH_CONTINUATION=1
-    POWERLINE_BASH_SELECT=1
-fi
-if [ -f /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh ]; then
-    source /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh
-fi
+#if [ -f `which powerline-daemon` ]; then
+#    powerline-daemon -q
+#    POWERLINE_BASH_CONTINUATION=1
+#    POWERLINE_BASH_SELECT=1
+#fi
+#if [ -f /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh ]; then
+#    source /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh
+#fi
 
 
 # ---------------------------------------------------------------------------- #
@@ -141,3 +142,10 @@ PKG_CONFIG_PATH="/usr/share/pkgconfig/:$PKG_CONFIG_PATH"
 PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/:$PKG_CONFIG_PATH"
 	
 export PKG_CONFIG_PATH
+
+
+
+# ---------------------------------------------------------------------------- #
+# Starship 
+# ---------------------------------------------------------------------------- #
+eval "$(starship init bash)"

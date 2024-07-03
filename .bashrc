@@ -2,7 +2,7 @@
 # File              : .bashrc
 # Author            : David Barcene <david.barcene@utp.ac.pa>
 # Date              : 25.01.2022
-# Last Modified Date: 12.07.2022
+# Last Modified Date: 27.06.2024
 # Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 # ---------------------------------------------------------------------------- #
@@ -51,7 +51,12 @@ alias docs='cd ~/Documents/'
 alias books='cd ~/books'
 alias notes='cd ~/Documents/articles/notes/'
 alias articles='cd ~/Documents/articles/'
-alias semester='cd ~/Documents/master-semester2-2022/'
+alias fem='cd ~/Documents/master-semester1-2022/computational-physics/fem-poisson/scripts'
+alias tesis='cd ~/Documents/APY-NI-2022-55/TESIS/tesis'
+alias anodizado='cd ~/Documents/APY-NI-2022-55/APY-NI/ANODIZADO'
+
+alias iberogun='ssh david.barcene@192.68.3.10 -p 22'
+
 
 # ---------------------------------------------------------------------------- #
 # The 'ls' family 
@@ -66,11 +71,12 @@ alias lu='ls -ltur'         #  Sort by/show access time,most recent last.
 alias lh='ls -a | egrep "^\."' # Dotfiles
 
 # The ubiquitous 'll': directories first, with alphanumeric sorting:
-alias ll="ls -lv --group-directories-first"
+alias ll="ls -lv --color --group-directories-first"
 alias lm='ll |more'         #  Pipe through 'more'
 alias lr='ll -R'            #  Recursive ls.
 alias la='ll -A'            #  Show hidden files.
 
+LS_COLORS=$LS_COLORS:'ow=1;34:' ; export LS_COLORS
 
 # ---------------------------------------------------------------------------- #
 # Some programs
@@ -79,7 +85,8 @@ alias la='ll -A'            #  Show hidden files.
 alias octave='octave --no-gui'
 alias pdf='zathura'              # PDF reader 
 alias chrome='google-chrome'     # Internet Browser
-alias burai='java -jar ~/Public/burai/bin/burai.jar'     # Internet Browser
+alias burai='java -jar ~/burai/bin/burai.jar'     # Internet Browser
+alias vesta='~/Public/VESTA-gtk3/./VESTA'     # Internet Browser
 # alias scihub='scihub -O ~/Documents/articles/'
 
 # ============================================================================ #
@@ -103,14 +110,14 @@ export notes="$articles/notes"
 # ---------------------------------------------------------------------------- #
 
 # load powerline
-#if [ -f `which powerline-daemon` ]; then
-#    powerline-daemon -q
-#    POWERLINE_BASH_CONTINUATION=1
-#    POWERLINE_BASH_SELECT=1
-#fi
-#if [ -f /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh ]; then
-#    source /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh
-#fi
+if [ -f `which powerline-daemon` ]; then
+    powerline-daemon -q
+    POWERLINE_BASH_CONTINUATION=1
+    POWERLINE_BASH_SELECT=1
+fi
+if [ -f /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh ]; then
+    source /usr/local/lib/python3.8/dist-packages/powerline/bindings/bash/powerline.sh
+fi
 
 
 # ---------------------------------------------------------------------------- #
@@ -134,7 +141,8 @@ unset __conda_setup
 
 # User specific environment
 PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-export PATH=/usr/java/jre1.8.0_333/bin:$PATH # Java
+export PATH=/usr/java/jre1.8.0_361/bin:$PATH # Java
+export PATH=/home/dbarcene/qe-6.8/bin:$PATH # quantum espresso
 export PATH
 
 
@@ -149,3 +157,4 @@ export PKG_CONFIG_PATH
 # Starship 
 # ---------------------------------------------------------------------------- #
 eval "$(starship init bash)"
+. "$HOME/.cargo/env"

@@ -2,7 +2,7 @@
 # File              : .bashrc
 # Author            : David Barcene <david.barcene@utp.ac.pa>
 # Date              : 25.01.2022
-# Last Modified Date: 27.06.2024
+# Last Modified Date: 26.02.2026
 # Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
 
 # ---------------------------------------------------------------------------- #

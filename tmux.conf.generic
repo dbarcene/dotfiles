@@ -1,0 +1,55 @@
+# File              : .tmux.conf
+# Author            : David Barcene <dbarcene@indicasat.org.pa>
+# Date              : 02.03.2026
+# Last Modified Date: 02.03.2026
+# Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
+
+# -----------------------------------------------------------------------------------
+# Start window and pane numberuing at 1
+# -----------------------------------------------------------------------------------
+set -g base-index 1
+setw -g pane-base-index 1
+
+# -----------------------------------------------------------------------------------
+# Re-number windows when one is closed
+# -----------------------------------------------------------------------------------
+set -g renumber-windows on
+
+# -----------------------------------------------------------------------------------
+# Mouse support (scrolling, clicking tabs and resizing panes)
+# -----------------------------------------------------------------------------------
+set -g mouse on
+
+
+
+# -----------------------------------------------------------------------------------
+# Status Bar Rice
+# -----------------------------------------------------------------------------------
+
+# --- Status Bar Rice ---
+
+# 1. General Status Bar Position & Style
+set -g status-position bottom       # You can change this to 'top' if you like the look
+set -g status-justify left          # Keeps the tabs on the left
+set -g status-style bg=default,fg=white
+set -g status-left-length 30        # Give the left side some room
+set -g status-right-length 150      # Give the right side plenty of room
+
+# 2. Left Side (The "Session" Indicator)
+# Displays a colored circle and the session name
+set -g status-left "#[fg=blue,bold] ● #S #[fg=white,nobold]"
+
+# 3. The Tabs (Windows)
+# Inactive tabs: simple text
+setw -g window-status-format "#[fg=brightblack] #I:#W "
+
+# Active tab: Cyan "Pill" look
+setw -g window-status-current-format "#[fg=cyan,bold]|#[bg=cyan,fg=black] #I:#W#[bg=default,fg=cyan]"
+
+# 4. Right Side (System Info)
+# Shows Date and Time with a clean separator
+set -g status-right "#[fg=brightblack] %Y-%m-%d │ #[fg=white,bold]%H:%M "
+
+# 5. Pane Borders (The lines between split screens)
+set -g pane-border-style fg=brightblack
+set -g pane-active-border-style fg=cyan

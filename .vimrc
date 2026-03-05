@@ -1,8 +1,8 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 05.06.2024
-" Last Modified By  : David Barcene <david.barcene@utp.ac.pa>
+" Last Modified Date: 05.03.2026
+" Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
 
 
 "       /VVVVVVVV\      /VVVVVVVV\
@@ -37,7 +37,7 @@ call plug#begin('~/.vim/plugged')
 	
 	Plug 'nanotech/jellybeans.vim'
 	Plug 'lervag/vimtex', { 'for': 'tex' }
-	Plug 'SirVer/ultisnips', { 'for': 'tex' }
+	Plug 'SirVer/ultisnips', { 'for': [ 'tex', 'markdown'] }
 	Plug '907th/vim-auto-save', { 'for': 'tex' }
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'nvie/vim-flake8'
@@ -47,6 +47,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'preservim/vim-markdown'
 	Plug 'preservim/nerdtree'
 	Plug 'junegunn/goyo.vim'
+	Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-commentary'
 	Plug 'tpope/vim-fugitive'
@@ -65,23 +67,22 @@ call plug#end()
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
+set noundofile
+set mouse=a
+
 colorscheme jellybeans
 let g:jellybeans_overrides = {
 	\'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
 	\}
-set backup
-set noswapfile
-silent !mkdir -p ./.bak > /dev/null 2>&1
-silent !mkdir -p ./.swp > /dev/null 2>&1
-set backupdir=./.bak
-set directory=./.swp
 set encoding=utf-8
 set textwidth=85
 set formatoptions+=t
 ru mcros/justify.vim
+
 "justify text
 nnoremap <C-j> gggqG_j 
 set number relativenumber 
+set showtabline=2
 set nocompatible
 set autoindent
 set autoread
@@ -154,6 +155,9 @@ hi Conceal ctermbg=none
 " ------------------------------------------------------------------------------
 " 	Vim-Markdown
 " ------------------------------------------------------------------------------
+set conceallevel=2
+let g:vim_markdown_fenced_languages = ['bash=sh', 'yaml', 'python']
+nnoremap <leader>nf :e ~/notes/hpc-cluster/inventory
 let g:vim_markdown_folding_disabled = 1
 
 " ------------------------------------------------------------------------------
@@ -174,13 +178,18 @@ let g:AutoPairsFlyMode = 1
 " ------------------------------------------------------------------------------
 let g:header_auto_add_header = 1
 let g:header_field_author = 'David Barcene'
-let g:header_field_author_email = 'david.barcene@utp.ac.pa'
+let g:header_field_author_email = 'dbarcene@indicasat.org.pa'
 map <F4> :AddHeader<CR>
 
 " ------------------------------------------------------------------------------
-"	Vimux
+" 	Vim-FZF
 " ------------------------------------------------------------------------------
-map <Leader>vp :VimuxPromptCommand<CR>
+" Search file names in your migration folder
+nnoremap <Leader>ff :Files ~/notes/hpc-cluster/<CR>
+" Search INSIDE the files (requires 'ripgrep' installed on your system)
+nnoremap <Leader>fg :Rg<CR>
+" Search open buffers
+nnoremap <Leader>fb :Buffers<CR>
 
 "# =========================================================================== #
 "#
@@ -218,19 +227,6 @@ inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" ------------------------------------------------------------------------------
-"	Powerline
-" ------------------------------------------------------------------------------
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-
-set laststatus=2 " Always display the statusline in all windows
-set showtabline=2 " Always display the tabline, even if there is only one tab
-set noshowmode " Hide the default mode (e.g. -- INSERT -- below the statusline)
-set t_Co=256
-
 
 "# =========================================================================== #
 "#

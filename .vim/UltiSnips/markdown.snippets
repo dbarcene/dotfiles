@@ -1,0 +1,54 @@
+# Software Inventory Template
+snippet hpcsoft "Template for HPC Software Audit" b
+---
+type: software
+name: ${1:name}
+version: ${2:version}
+compiler: ${3:gcc-4.8}
+mpi: ${4:none}
+repo: ${5:base}
+path: ${6:path}
+status: audited
+---
+# Audit Notes: $1
+- Found in: $5 [cite: 7, 24]
+- Binary location: $6
+- Dependencies:
+  - ${7:ldd_output}
+
+${0}
+endsnippet
+
+# Migration Task Template (Integrates with Taskwarrior thoughts)
+snippet hpctask "Template for Migration Task" b
+---
+project: Migration
+priority: ${1:M}
+tags: [${2:tag}]
+created: `date +%Y-%m-%d`
+---
+# Task: ${3:Task Description}
+- [ ] Subtask 1
+- [ ] Subtask 2
+
+Reference: [[${4:Linked_Software_Note}]]
+${0}
+endsnippet
+
+# Infrastructure/Hardware Template
+snippet hpcinfra "Template for HPC Infrastructure Audit" b
+---
+type: infrastructure
+component: ${1:OS/Hardware/Network}
+hostname: ${2:baru.cluster}
+os: ${3:CentOS 7}
+kernel: ${4:3.10.0...}
+status: audited
+---
+# $1 Details
+- **Kernel**: $4
+- **Architecture**: ${5:x86_64}
+
+## Hardware Notes
+${0}
+endsnippet

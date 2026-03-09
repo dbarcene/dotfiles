@@ -1,8 +1,14 @@
-# File              : .tmux.conf
+# File              : tmux.conf.generic
 # Author            : David Barcene <dbarcene@indicasat.org.pa>
 # Date              : 02.03.2026
-# Last Modified Date: 02.03.2026
+# Last Modified Date: 09.03.2026
 # Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
+
+
+
+set -g mode-keys vi
+# bind-key -T copy-mode-vi y send-copy-selection-and-cancel
+
 
 # -----------------------------------------------------------------------------------
 # Start window and pane numberuing at 1

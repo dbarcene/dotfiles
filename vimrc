@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 06.03.2026
+" Last Modified Date: 12.03.2026
 " Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
 
 
@@ -199,10 +199,10 @@ let g:header_field_author_email = 'dbarcene@indicasat.org.pa'
 map <F4> :AddHeader<CR>
 
 " -----------------------------------------------------------------------------------
-" 	Vim-FZF
+" 	Vim-fzf
 " -----------------------------------------------------------------------------------
-" Search file names in your migration folder
-nnoremap <Leader>ff :Files ~/notes/hpc-cluster/<CR>
+" Search file names 
+nnoremap <Leader>ff :Files /home/dbarcene/<CR>
 " Search INSIDE the files (requires 'ripgrep' installed on your system)
 nnoremap <Leader>fg :Rg<CR>
 " Search open buffers

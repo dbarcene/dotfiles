@@ -41,6 +41,6 @@ style = "Regular"
 
 [window]
 startup_mode = "Maximized"
-opacity = 0.6
+opacity = 0.8
 
 [keyboard]

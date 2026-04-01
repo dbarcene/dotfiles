@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 12.03.2026
+" Last Modified Date: 01.04.2026
 " Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
 
 
@@ -36,6 +36,7 @@ endif
 call plug#begin('~/.vim/plugged')
 	
 	Plug 'nanotech/jellybeans.vim'
+"	Plug 'cocopon/iceberg.vim'
 	Plug 'lervag/vimtex', { 'for': 'tex' }
 	Plug 'SirVer/ultisnips', { 'for': [ 'tex', 'markdown'] }
 	Plug '907th/vim-auto-save', { 'for': 'tex' }
@@ -210,6 +211,18 @@ nnoremap <Leader>fb :Buffers<CR>
 
 "# ================================================================================ #
 "#
+"# 	C
+"#
+"# ================================================================================ #
+
+au BufNewFile,BufRead *.c
+	\ set textwidth=80 |
+	\ set noexpandtab |
+	\ set autoindent |
+	\ set fileformat=unix
+
+"# ================================================================================ #
+"#
 "# 	Python
 "#
 "# ================================================================================ #
@@ -239,11 +252,19 @@ let g:flake8_show_in_gutter = 1
 " -----------------------------------------------------------------------------------
 "	CoC
 " -----------------------------------------------------------------------------------
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+
 " Use <Tab> and <S-Tab> to navigate the completion list
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
 
 "# ================================================================================ #
 "#
@@ -279,3 +300,8 @@ endif
 
 let g:syntastic_json_checkers = ['jsonlint']
 let g:vim_json_syntax_conceal = 0
+
+
+
+
+

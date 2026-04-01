@@ -215,20 +215,15 @@ nnoremap <Leader>fb :Buffers<CR>
 "#
 "# ================================================================================ #
 
-" au BufNewFile,BufRead *.c
-" 	\ set textwidth=80 |
-" 	\ set noexpandtab |
-" 	\ set autoindent |
-" 	\ set fileformat=unix
+autocmd Filetype c,cpp
+	\ setlocal tabstop=8 |
+	\ setlocal shiftwidth=8 |
+	\ setlocal softtabstop=0 |
+	\ setlocal noexpandtab |
+	\ setlocal nosmarttab |
+	\ setlocal textwidth=80 |
 
-au BufNewFile,BufRead *.c,*.h
-    \ setlocal tabstop=8 |
-    \ setlocal shiftwidth=8 |
-    \ setlocal softtabstop=0 |
-    \ setlocal noexpandtab |
-    \ setlocal textwidth=80 |
-    \ setlocal autoindent |
-    \ setlocal fileformat=unix
+
 
 "# ================================================================================ #
 "#

@@ -1,28 +1,41 @@
 {
-	"suggest.noselect": false,
-	"coc.preferences.formatOnSaveFiletypes": [
-		"json",
-		"python"
-	],
-	"coc.source.bibtex.filetypes": [
-		"tex",
-		"plaintex",
-		"latex",
-		"pandoc",
-		"markdown"
-	],
-	"list.source.bibtex.files": [
-		"/home/dbarcene/Documents/bibliography/ref.bib"
-	],
-	"list.source.bibtex.citation": {
-		"before": "[@",
-		"after": "]"
-	},
-	"coc.source.bibtex.triggerPatterns": [
-		"cite\\{",
-		"cite\\{.*, "
-	],
-	"coc.source.bibtex.triggerCharacters": [
-		"@"
-	]
+  "suggest.noselect": false,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "json",
+    "python",
+    "c",
+    "cpp"
+  ],
+  "coc.preferences.rootPatterns": [
+    ".git",
+    ".hg",
+    "compile_flags.txt",
+    "compile_commands.json"
+  ],
+  "clangd.path": "/usr/bin/clangd",
+  "clangd.arguments": [
+    "--background-index",
+    "--completion-style=detailed"
+  ],
+  "coc.source.bibtex.filetypes": [
+    "tex",
+    "plaintex",
+    "latex",
+    "pandoc",
+    "markdown"
+  ],
+  "list.source.bibtex.files": [
+    "/home/dbarcene/.bibliography/ref.bib"
+  ],
+  "list.source.bibtex.citation": {
+    "before": "[@",
+    "after": "]"
+  },
+  "coc.source.bibtex.triggerPatterns": [
+    "cite\\{",
+    "cite\\{.*, "
+  ],
+  "coc.source.bibtex.triggerCharacters": [
+    "@"
+  ]
 }

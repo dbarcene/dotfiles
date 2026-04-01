@@ -1,0 +1,16 @@
+# File              : .clang-format
+# Author            : David Barcene <dbarcene@indicasat.org.pa>
+# Date              : 01.04.2026
+# Last Modified Date: 01.04.2026
+# Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
+---
+Language: Cpp
+BasedOnStyle: LLVM
+IndentWidth: 8
+TabWidth: 8
+UseTab: Always
+# This forces: int main() {
+BreakBeforeBraces: Attach
+# This ensures it doesn't break braces for other blocks either
+AllowShortBlocksOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None

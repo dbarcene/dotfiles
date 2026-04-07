@@ -1,61 +1,154 @@
 # File              : tmux.conf.generic
 # Author            : David Barcene <dbarcene@indicasat.org.pa>
 # Date              : 02.03.2026
-# Last Modified Date: 09.03.2026
+# Last Modified Date: 07.04.2026
 # Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
 
-
-
+# ============================================================
+#  CORE BEHAVIOUR  
+# ============================================================
 set -g mode-keys vi
-# bind-key -T copy-mode-vi y send-copy-selection-and-cancel
-
-
-# -----------------------------------------------------------------------------------
-# Start window and pane numberuing at 1
-# -----------------------------------------------------------------------------------
 set -g base-index 1
 setw -g pane-base-index 1
-
-# -----------------------------------------------------------------------------------
-# Re-number windows when one is closed
-# -----------------------------------------------------------------------------------
 set -g renumber-windows on
-
-# -----------------------------------------------------------------------------------
-# Mouse support (scrolling, clicking tabs and resizing panes)
-# -----------------------------------------------------------------------------------
 set -g mouse on
 
+# ============================================================
+#  TERMINAL & GENERAL
+# ============================================================
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",*256col*:Tc"   # True-colour passthrough
+set -g escape-time 0                         # No ESC delay (great for Neovim)
+set -g history-limit 50000
+set -g focus-events on
+set -g status-interval 5                     # Refresh statusbar every 5 s
 
+# ============================================================
+#  TOKYO NIGHT PALETTE
+# ============================================================
+#   bg         #1a1b26
+#   bg_dark    #16161e
+#   bg_alt     #1f2335
+#   fg         #c0caf5
+#   comment    #565f89
+#   blue       #7aa2f7
+#   cyan       #7dcfff
+#   green      #9ece6a
+#   magenta    #bb9af7
+#   orange     #ff9e64
+#   red        #f7768e
+#   yellow     #e0af68
 
-# -----------------------------------------------------------------------------------
-# Status Bar Rice
-# -----------------------------------------------------------------------------------
+# ============================================================
+#  PANE BORDERS
+# ============================================================
+set -g pane-border-style          "fg=#3b4261"
+set -g pane-active-border-style   "fg=#7aa2f7"
+set -g pane-border-lines          rounded
 
-# --- Status Bar Rice ---
+# ============================================================
+#  PANE NUMBER DISPLAY  (prefix-q)
+# ============================================================
+set -g display-panes-colour        "#565f89"
+set -g display-panes-active-colour "#7aa2f7"
+set -g display-panes-time          2000
 
-# 1. General Status Bar Position & Style
-set -g status-position bottom       # You can change this to 'top' if you like the look
-set -g status-justify left          # Keeps the tabs on the left
-set -g status-style bg=default,fg=white
-set -g status-left-length 30        # Give the left side some room
-set -g status-right-length 150      # Give the right side plenty of room
+# ============================================================
+#  MESSAGE / COMMAND LINE
+# ============================================================
+set -g message-style          "fg=#c0caf5,bg=#1f2335,bold"
+set -g message-command-style  "fg=#e0af68,bg=#1f2335"
 
-# 2. Left Side (The "Session" Indicator)
-# Displays a colored circle and the session name
-set -g status-left "#[fg=blue,bold] ● #S #[fg=white,nobold]"
+# ============================================================
+#  COPY MODE
+# ============================================================
+set -g mode-style "fg=#1a1b26,bg=#7aa2f7"
 
-# 3. The Tabs (Windows)
-# Inactive tabs: simple text
-setw -g window-status-format "#[fg=brightblack] #I:#W "
+# ============================================================
+#  STATUS BAR — LAYOUT
+# ============================================================
+set -g status-position   bottom
+set -g status-justify    left
+set -g status-style      "bg=#16161e,fg=#c0caf5"
+set -g status-left-length  40
+set -g status-right-length 120
 
-# Active tab: Cyan "Pill" look
-setw -g window-status-current-format "#[fg=cyan,bold]|#[bg=cyan,fg=black] #I:#W#[bg=default,fg=cyan]"
+# ── Powerline characters used ────────────────────────────────
+#   Solid right arrow :  (U+E0B0)
+#   Thin  right arrow :  (U+E0B1)
+#   Solid left  arrow :  (U+E0B2)
+#   Thin  left  arrow :  (U+E0B3)
+#   (requires a Nerd Font / Powerline-patched font)
 
-# 4. Right Side (System Info)
-# Shows Date and Time with a clean separator
-set -g status-right "#[fg=brightblack] %Y-%m-%d │ #[fg=white,bold]%H:%M "
+# ============================================================
+#  STATUS LEFT  — session badge
+#  Looks like:  [  main ] ▶
+# ============================================================
+set -g status-left "\
+#[fg=#1a1b26,bg=#7aa2f7,bold]  #S \
+#[fg=#7aa2f7,bg=#1f2335,nobold]\
+#[fg=#565f89,bg=#1f2335] #(whoami) \
+#[fg=#1f2335,bg=#16161e]"
 
-# 5. Pane Borders (The lines between split screens)
-set -g pane-border-style fg=brightblack
-set -g pane-active-border-style fg=cyan
+# ============================================================
+#  WINDOW TABS
+# ============================================================
+# Inactive
+setw -g window-status-style         "fg=#565f89,bg=#16161e"
+setw -g window-status-format        " #[fg=#565f89]#I #[fg=#3b4261]#W "
+
+# Active — blue pill
+setw -g window-status-current-style "fg=#1a1b26,bg=#7aa2f7,bold"
+setw -g window-status-current-format \
+"#[fg=#7aa2f7,bg=#16161e]\
+#[fg=#1a1b26,bg=#7aa2f7,bold] #I  #W \
+#[fg=#7aa2f7,bg=#16161e,nobold]"
+
+# Activity alert (another window has output)
+setw -g window-status-activity-style "fg=#e0af68,bg=#16161e"
+set  -g monitor-activity on
+set  -g visual-activity   off
+
+# ============================================================
+#  STATUS RIGHT  — date / time
+#  Looks like:  ◀  󰃭 2026-04-07  08:42 
+# ============================================================
+set -g status-right "\
+#[fg=#1f2335,bg=#16161e]\
+#[fg=#565f89,bg=#1f2335]  \
+#[fg=#565f89,bg=#1f2335]%Y-%m-%d \
+#[fg=#7aa2f7,bg=#1f2335,bold]  %H:%M \
+#[fg=#7aa2f7,bg=#1f2335]\
+#[fg=#1a1b26,bg=#7aa2f7,bold]  #h "
+
+# ============================================================
+#  KEY BINDINGS  (all additive — none of your originals removed)
+# ============================================================
+
+# Reload config in-place
+bind r source-file ~/.tmux.conf \; display-message "  Config reloaded!"
+
+# Intuitive split bindings that keep the current path
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+# Vim-style pane navigation
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Resize panes with capital HJKL (repeatable)
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Move windows left/right
+bind -r "<" swap-window -d -t -1
+bind -r ">" swap-window -d -t +1
+
+# Vi copy-mode: v to select, y to yank
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send -X copy-selection-and-cancel
+bind -T copy-mode-vi C-v send -X rectangle-toggle

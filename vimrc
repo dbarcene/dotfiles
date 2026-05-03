@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 01.04.2026
+" Last Modified Date: 03.05.2026
 " Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
 
 
@@ -35,8 +35,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
 	
-	Plug 'nanotech/jellybeans.vim'
-"	Plug 'cocopon/iceberg.vim'
+"	Plug 'nanotech/jellybeans.vim'
+	Plug 'cocopon/iceberg.vim'
+" 	Plug 'morhetz/gruvbox'
+	Plug 'hail2u/vim-css3-syntax'
 	Plug 'lervag/vimtex', { 'for': 'tex' }
 	Plug 'SirVer/ultisnips', { 'for': [ 'tex', 'markdown'] }
 	Plug '907th/vim-auto-save', { 'for': 'tex' }
@@ -73,10 +75,14 @@ let mapleader=" "
 set noundofile
 set mouse=a
 
-colorscheme jellybeans
-let g:jellybeans_overrides = {
-	\'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
-	\}
+set termguicolors
+colorscheme iceberg
+set background=dark
+let g:gruvbox_contrast_dark = 'hard' " This gets it close, but for exact match:
+autocmd vimenter * hi Normal guibg=#131313
+"let g:jellybeans_overrides = {
+"	\'background': { 'ctermbg': 'none', '256ctermbg': 'none' }
+"	\}
 set encoding=utf-8
 set textwidth=85
 set formatoptions+=t
@@ -151,8 +157,8 @@ let g:vimtex_compiler_latexmk = {
 
 " -----------------------------------------------------------------------------------
 " 	Ultisnips
-" -----------------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger = '<tab>' 
+"" -----------------------------------------------------------------------------------
+"let g:UltiSnipsExpandTrigger = '<tab>' 
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-Tab>'
 let g:UltiSnipsSnippetsDir = "/home/dbarcene/.vim/UltiSnips"
@@ -223,29 +229,28 @@ autocmd Filetype c,cpp
 	\ setlocal nosmarttab |
 	\ setlocal textwidth=80 |
 
-
-
 "# ================================================================================ #
 "#
 "# 	Python
 "#
 "# ================================================================================ #
 
-au BufNewFile,BufRead *.py
-	\ set tabstop=4 |
-	\ set softtabstop=4 |
-	\ set shiftwidth=4 |
-	\ set textwidth=80 |
-	\ set expandtab |
-	\ set autoindent |
-	\ set fileformat=unix
+augroup python_settings
+    autocmd!
+    autocmd FileType python setlocal tabstop=4
+    autocmd FileType python setlocal softtabstop=4
+    autocmd FileType python setlocal shiftwidth=4
+    autocmd FileType python setlocal textwidth=80
+    autocmd FileType python setlocal expandtab
+    autocmd FileType python setlocal autoindent
+    autocmd FileType python setlocal fileformat=unix
+augroup END
 
-if exists('python_highlight_all')
-    unlet python_highlight_all
-endif
 let g:python_recommended_style = 0
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+" Run python with F9
+autocmd FileType python nnoremap <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python inoremap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 " -----------------------------------------------------------------------------------
 "	Flake8

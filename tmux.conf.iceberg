@@ -1,12 +1,13 @@
-# File              : .tmux.conf
+# File              : tmux.conf.iceberg
 # Author            : David Barcene <dbarcene@indicasat.org.pa>
-# Date              : 11.04.2026
-# Last Modified Date: 11.04.2026
+# Date              : 03.05.2026
+# Last Modified Date: 03.05.2026
 # Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
-# File              : .tmux.conf
+
+# File              : tmux.conf.iceberg
 # Author            : David Barcene <dbarcene@indicasat.org.pa>
-# Last Modified     : 11.04.2026
-# Theme             : Gruvbox Dark
+# Last Modified     : 03.05.2026
+# Theme             : Iceberg (cocopon)
 
 # ============================================================
 #  CORE BEHAVIOUR
@@ -28,52 +29,49 @@ set -g focus-events on
 set -g status-interval 5
 
 # ============================================================
-#  GRUVBOX PALETTE (Dark)
+#  ICEBERG PALETTE
 # ============================================================
-#   bg0        #282828
-#   bg1        #3c3836
-#   bg4        #7c6f64
-#   fg0        #fbf1c7
-#   fg4        #a89984
-#   gray       #928374
-#   red        #fb4934
-#   green      #b8bb26
-#   yellow     #fabd2f
-#   blue       #83a598
-#   purple     #d3869b
-#   aqua       #8ec07c
-#   orange     #fe8019
+#   bg         #161821
+#   fg         #c6c8d1
+#   status_bg  #1e2132
+#   border     #3e445e
+#   blue       #84a0c6
+#   green      #b4be82
+#   orange     #e2a478
+#   purple     #ad8ee6
+#   red        #e27878
+#   selection  #2a3158
 
 # ============================================================
 #  PANE BORDERS
 # ============================================================
-set -g pane-border-style          "fg=#3c3836"
-set -g pane-active-border-style   "fg=#fabd2f"
+set -g pane-border-style          "fg=#3e445e"
+set -g pane-active-border-style   "fg=#84a0c6"
 
 # ============================================================
 #  PANE NUMBER DISPLAY  (prefix-q)
 # ============================================================
-set -g display-panes-colour        "#7c6f64"
-set -g display-panes-active-colour "#fabd2f"
+set -g display-panes-colour        "#3e445e"
+set -g display-panes-active-colour "#84a0c6"
 set -g display-panes-time          2000
 
 # ============================================================
 #  MESSAGE / COMMAND LINE
 # ============================================================
-set -g message-style          "fg=#fbf1c7,bg=#3c3836,bold"
-set -g message-command-style  "fg=#fabd2f,bg=#3c3836"
+set -g message-style          "fg=#c6c8d1,bg=#1e2132,bold"
+set -g message-command-style  "fg=#84a0c6,bg=#1e2132"
 
 # ============================================================
 #  COPY MODE
 # ============================================================
-set -g mode-style "fg=#282828,bg=#83a598"
+set -g mode-style "fg=#c6c8d1,bg=#2a3158"
 
 # ============================================================
 #  STATUS BAR — LAYOUT
 # ============================================================
 set -g status-position   bottom
 set -g status-justify    left
-set -g status-style      "bg=#282828,fg=#ebdbb2"
+set -g status-style      "bg=#1e2132,fg=#c6c8d1"
 set -g status-left-length  40
 set -g status-right-length 120
 
@@ -81,27 +79,27 @@ set -g status-right-length 120
 #  STATUS LEFT  — session badge
 # ============================================================
 set -g status-left "\
-#[fg=#282828,bg=#a89984,bold]  #S \
-#[fg=#a89984,bg=#3c3836,nobold]\
-#[fg=#ebdbb2,bg=#3c3836] #(whoami) \
-#[fg=#3c3836,bg=#282828]"
+#[fg=#161821,bg=#84a0c6,bold]  #S \
+#[fg=#84a0c6,bg=#2a3158,nobold]\
+#[fg=#c6c8d1,bg=#2a3158] #(whoami) \
+#[fg=#2a3158,bg=#1e2132]"
 
 # ============================================================
 #  WINDOW TABS
 # ============================================================
 # Inactive
-setw -g window-status-style         "fg=#928374,bg=#282828"
-setw -g window-status-format        " #[fg=#a89984]#I #[fg=#7c6f64]#W "
+setw -g window-status-style         "fg=#6b7089,bg=#1e2132"
+setw -g window-status-format        " #[fg=#6b7089]#I #[fg=#6b7089]#W "
 
-# Active — yellow pill
-setw -g window-status-current-style "fg=#282828,bg=#fabd2f,bold"
+# Active — blue pill
+setw -g window-status-current-style "fg=#161821,bg=#84a0c6,bold"
 setw -g window-status-current-format \
-"#[fg=#fabd2f,bg=#282828]\
-#[fg=#282828,bg=#fabd2f,bold] #I  #W \
-#[fg=#fabd2f,bg=#282828,nobold]"
+"#[fg=#84a0c6,bg=#1e2132]\
+#[fg=#161821,bg=#84a0c6,bold] #I  #W \
+#[fg=#84a0c6,bg=#1e2132,nobold]"
 
 # Activity alert
-setw -g window-status-activity-style "fg=#fe8019,bg=#282828"
+setw -g window-status-activity-style "fg=#e2a478,bg=#1e2132"
 set  -g monitor-activity on
 set  -g visual-activity   off
 
@@ -109,12 +107,12 @@ set  -g visual-activity   off
 #  STATUS RIGHT  — date / time
 # ============================================================
 set -g status-right "\
-#[fg=#3c3836,bg=#282828]\
-#[fg=#a89984,bg=#3c3836]  \
-#[fg=#a89984,bg=#3c3836]%Y-%m-%d \
-#[fg=#fabd2f,bg=#3c3836,bold]  %H:%M \
-#[fg=#fabd2f,bg=#3c3836]\
-#[fg=#282828,bg=#fabd2f,bold]  #h "
+#[fg=#2a3158,bg=#1e2132]\
+#[fg=#c6c8d1,bg=#2a3158]  \
+#[fg=#c6c8d1,bg=#2a3158]%Y-%m-%d \
+#[fg=#84a0c6,bg=#2a3158,bold]  %H:%M \
+#[fg=#84a0c6,bg=#2a3158]\
+#[fg=#161821,bg=#84a0c6,bold]  #h "
 
 # ============================================================
 #  KEY BINDINGS

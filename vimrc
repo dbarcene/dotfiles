@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 03.05.2026
+" Last Modified Date: 05.05.2026
 " Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
 
 
@@ -36,8 +36,8 @@ endif
 call plug#begin('~/.vim/plugged')
 	
 "	Plug 'nanotech/jellybeans.vim'
-	Plug 'cocopon/iceberg.vim'
-" 	Plug 'morhetz/gruvbox'
+"	Plug 'cocopon/iceberg.vim'
+ 	Plug 'morhetz/gruvbox'
 	Plug 'hail2u/vim-css3-syntax'
 	Plug 'lervag/vimtex', { 'for': 'tex' }
 	Plug 'SirVer/ultisnips', { 'for': [ 'tex', 'markdown'] }
@@ -76,7 +76,7 @@ set noundofile
 set mouse=a
 
 set termguicolors
-colorscheme iceberg
+colorscheme gruvbox
 set background=dark
 let g:gruvbox_contrast_dark = 'hard' " This gets it close, but for exact match:
 autocmd vimenter * hi Normal guibg=#131313
@@ -309,8 +309,5 @@ endif
 
 let g:syntastic_json_checkers = ['jsonlint']
 let g:vim_json_syntax_conceal = 0
-
-
-
 
 

@@ -1,7 +1,7 @@
 " File              : .vimrc
 " Author            : David Barcene <david.barcene@utp.ac.pa>
 " Date              : 15.01.2022
-" Last Modified Date: 05.05.2026
+" Last Modified Date: 06.10.2026
 " Last Modified By  : David Barcene <dbarcene@indicasat.org.pa>
 
 
@@ -72,7 +72,7 @@ call plug#end()
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
-set noundofile
+set undodir=~/./vim/undo/
 set mouse=a
 
 set termguicolors
@@ -139,7 +139,7 @@ highlight BufTabLineHidden ctermbg=black ctermfg=white
 " 	Vimtex
 " -----------------------------------------------------------------------------------
 let g:tex_flavor='xelatex'
-let g:vimtex_view_method='zathura'
+let g:vimtex_view_method='mupdf'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'

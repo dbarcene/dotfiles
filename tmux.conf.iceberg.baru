@@ -1,0 +1,159 @@
+# File              : tmux.conf.iceberg  (HPC / remote variant)
+# Author            : David Barcene <dbarcene@indicasat.org.pa>
+# Theme             : Iceberg (cocopon) — remote variant
+# Notes             : Designed to visually contrast with the local Gruvbox
+#                     config so nested sessions are unmistakable.
+#                       - Prefix is C-a   (local stays C-b)
+#                       - Status bar on TOP  (local is bottom)
+#                       - Hostname pill on the far left
+#                       - Prefix-active indicator on the right
+
+# ============================================================
+#  PREFIX  (differs from local to avoid nested-key collision)
+# ============================================================
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# ============================================================
+#  CORE BEHAVIOUR
+# ============================================================
+set -g mode-keys vi
+set -g base-index 1
+setw -g pane-base-index 1
+set -g renumber-windows on
+set -g mouse on
+
+# Useful on a remote multiplexer: rescale when clients of different
+# sizes attach to the same session.
+setw -g aggressive-resize on
+
+# Propagate "tmux@hostname" into the outer terminal's title bar.
+set -g set-titles on
+set -g set-titles-string "tmux@#h — #S:#I.#P #W"
+
+# ============================================================
+#  TERMINAL & GENERAL
+# ============================================================
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",*256col*:Tc"
+set -g escape-time 0
+set -g history-limit 50000
+set -g focus-events on
+set -g status-interval 5
+
+# ============================================================
+#  ICEBERG PALETTE
+# ============================================================
+#   bg         #161821
+#   fg         #c6c8d1
+#   status_bg  #1e2132
+#   border     #3e445e
+#   blue       #84a0c6
+#   green      #b4be82
+#   orange     #e2a478
+#   purple     #ad8ee6
+#   red        #e27878
+#   selection  #2a3158
+
+# ============================================================
+#  PANE BORDERS
+# ============================================================
+set -g pane-border-style          "fg=#3e445e"
+set -g pane-active-border-style   "fg=#84a0c6"
+
+# ============================================================
+#  PANE NUMBER DISPLAY  (prefix-q)
+# ============================================================
+set -g display-panes-colour        "#3e445e"
+set -g display-panes-active-colour "#84a0c6"
+set -g display-panes-time          2000
+
+# ============================================================
+#  MESSAGE / COMMAND LINE
+# ============================================================
+set -g message-style          "fg=#c6c8d1,bg=#1e2132,bold"
+set -g message-command-style  "fg=#84a0c6,bg=#1e2132"
+
+# ============================================================
+#  COPY MODE
+# ============================================================
+set -g mode-style "fg=#c6c8d1,bg=#2a3158"
+
+# ============================================================
+#  STATUS BAR — LAYOUT
+#  Position TOP so it's immediately distinguishable from the
+#  local (bottom) status bar of the gruvbox config.
+# ============================================================
+set -g status-position   top
+set -g status-justify    left
+set -g status-style      "bg=#1e2132,fg=#c6c8d1"
+set -g status-left-length  60
+set -g status-right-length 120
+
+# ============================================================
+#  STATUS LEFT  — hostname pill + session badge
+#  Hostname is shown first (and most prominently) because the
+#  whole point of this config is "you are on a remote box".
+# ============================================================
+set -g status-left "\
+#[fg=#161821,bg=#ad8ee6,bold]  #h \
+#[fg=#ad8ee6,bg=#84a0c6,nobold]\
+#[fg=#161821,bg=#84a0c6,bold] #S \
+#[fg=#84a0c6,bg=#2a3158,nobold]\
+#[fg=#c6c8d1,bg=#2a3158] #(whoami) \
+#[fg=#2a3158,bg=#1e2132]"
+
+# ============================================================
+#  WINDOW TABS
+# ============================================================
+# Inactive
+setw -g window-status-style         "fg=#6b7089,bg=#1e2132"
+setw -g window-status-format        " #[fg=#6b7089]#I #[fg=#6b7089]#W "
+
+# Active — blue pill
+setw -g window-status-current-style "fg=#161821,bg=#84a0c6,bold"
+setw -g window-status-current-format \
+"#[fg=#84a0c6,bg=#1e2132]\
+#[fg=#161821,bg=#84a0c6,bold] #I  #W \
+#[fg=#84a0c6,bg=#1e2132,nobold]"
+
+# Activity alert
+setw -g window-status-activity-style "fg=#e2a478,bg=#1e2132"
+set  -g monitor-activity on
+set  -g visual-activity   off
+
+# ============================================================
+#  STATUS RIGHT  — prefix indicator + date / time + host
+#  The prefix indicator turns red when C-a is captured by THIS
+#  tmux, so during nested operation you can see at a glance
+#  whose prefix is active.
+# ============================================================
+set -g status-right "\
+#[fg=#e27878,bg=#1e2132,bold]#{?client_prefix,⌁ PREFIX ,}\
+#[fg=#2a3158,bg=#1e2132]\
+#[fg=#c6c8d1,bg=#2a3158]  \
+#[fg=#c6c8d1,bg=#2a3158]%Y-%m-%d \
+#[fg=#84a0c6,bg=#2a3158,bold]  %H:%M \
+#[fg=#84a0c6,bg=#2a3158]\
+#[fg=#161821,bg=#84a0c6,bold]  #(uptime | awk -F'load average:' '{print $2}' | awk '{print $1}' | tr -d ',') "
+
+# ============================================================
+#  KEY BINDINGS
+# ============================================================
+bind r source-file ~/.tmux.conf \; display-message "  Config reloaded!"
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+bind -r "<" swap-window -d -t -1
+bind -r ">" swap-window -d -t +1
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send -X copy-selection-and-cancel
+bind -T copy-mode-vi C-v send -X rectangle-toggle
